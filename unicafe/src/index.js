@@ -22,9 +22,14 @@ const Button = ({handleClick,teksti}) => {
 
 const Statistic = ({teksti,maara}) => {
   return (
-    <div>
-      {teksti} {maara}<br/>
-    </div>
+    <tr>
+      <td>
+        {teksti}
+      </td>
+      <td>
+       {maara}
+      </td>
+    </tr>
   )
 }
 
@@ -41,28 +46,30 @@ const Statistics = ({hyvat,neutraalit,huonot}) => {
     prosenttia = prosenttia.toFixed(1) + ' %'
 
     return (
-      <div>
-        <Statistic
-          teksti = 'hyvä'
-          maara = {hyvat}
-        />
-        <Statistic
-          teksti = 'neutraali'
-          maara = {neutraalit}
-        />
-        <Statistic
-          teksti = 'huono'
-          maara = {huonot}
-        />
-        <Statistic
-          teksti = 'keskiarvo'
-          maara = {keskiarvo}
-        />
-        <Statistic
-          teksti = 'positiivisia'
-          maara = {prosenttia}
-        />
-      </div>
+      <table>
+        <tbody>
+          <Statistic
+            teksti = 'hyvä'
+            maara = {hyvat}
+            />
+          <Statistic
+            teksti = 'neutraali'
+            maara = {neutraalit}
+          />
+          <Statistic
+            teksti = 'huono'
+            maara = {huonot}
+            />
+          <Statistic
+            teksti = 'keskiarvo'
+            maara = {keskiarvo}
+          />
+          <Statistic
+            teksti = 'positiivisia'
+            maara = {prosenttia}
+          />
+        </tbody>
+      </table>
     )
   }
 
