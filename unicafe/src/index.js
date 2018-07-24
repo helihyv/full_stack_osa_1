@@ -10,7 +10,7 @@ const Otsikko = ({teksti}) => {
   )
 }
 
-const Nappi = ({handleClick,teksti}) => {
+const Button = ({handleClick,teksti}) => {
   return(
     <div>
       <button onClick= {handleClick} >
@@ -20,10 +20,52 @@ const Nappi = ({handleClick,teksti}) => {
   )
 }
 
-const Tilasto = ({teksti,maara}) => {
+const Statistic = ({teksti,maara}) => {
   return (
     <div>
       {teksti} {maara}<br/>
+    </div>
+  )
+}
+
+const Statistics = ({hyvat,neutraalit,huonot}) => {
+
+  const yhteensa = hyvat + neutraalit + huonot
+  let keskiarvo = 0
+  let prosenttia = '0 %'
+
+  if (yhteensa !== 0) {
+
+    keskiarvo = (hyvat + huonot * -1) / (yhteensa)
+    keskiarvo = keskiarvo.toFixed(1)
+
+    prosenttia = hyvat / (yhteensa) * 100
+    prosenttia = prosenttia.toFixed(1) + ' %'
+  }
+
+  return (
+    <div>
+    <Statistic
+      teksti = 'hyvä'
+      maara = {hyvat}
+      />
+    <Statistic
+      teksti = 'neutraali'
+      maara = {neutraalit}
+    />
+    <Statistic
+      teksti = 'huono'
+      maara = {huonot}
+    />
+    <Statistic
+      teksti = 'keskiarvo'
+      maara = {keskiarvo}
+    />
+    <Statistic
+      teksti = 'positiivisia'
+      maara = {prosenttia}
+    />
+
     </div>
   )
 }
@@ -55,55 +97,26 @@ class App extends React.Component {
 
   render () {
 
-    let keskiarvo = 0
-    let prosenttia = '0 %'
-
-    if (this.state.hyvat + this.state.neutraalit + this.state.huonot !== 0) {
-
-      keskiarvo = (this.state.hyvat * 1 + this.state.huonot * -1)
-      / (this.state.hyvat + this.state.neutraalit + this.state.huonot)
-      keskiarvo = keskiarvo.toFixed(1)
-
-      prosenttia = this.state.hyvat
-      / (this.state.hyvat + this.state.neutraalit + this.state.huonot) * 100
-      prosenttia = prosenttia.toFixed(1) + ' %'
-    }
-
     return (
       <div>
         <Otsikko teksti = 'anna palautetta' />
-        <Nappi
+        <Button
           handleClick = {this.lisaaYksiHyva}
           teksti = 'hyvä'
           />
-        <Nappi
+        <Button
           handleClick = {this.lisaaYksiNeutraali}
           teksti = 'neutraali'
         />
-        <Nappi
+        <Button
           handleClick = {this.lisaaYksiHuono}
           teksti = 'huono'
         />
         <Otsikko teksti = 'statistiikka' />
-        <Tilasto
-          teksti = 'hyvä'
-          maara = {this.state.hyvat}
-          />
-        <Tilasto
-          teksti = 'neutraali'
-          maara = {this.state.neutraalit}
-        />
-        <Tilasto
-          teksti = 'huono'
-          maara = {this.state.huonot}
-        />
-        <Tilasto
-          teksti = 'keskiarvo'
-          maara = {keskiarvo}
-        />
-        <Tilasto
-          teksti = 'positiivisia'
-          maara = {prosenttia}
+        <Statistics
+          hyvat = {this.state.hyvat}
+          neutraalit = {this.state.neutraalit}
+          huonot = {this.state.huonot}
         />
       </div>
     )
