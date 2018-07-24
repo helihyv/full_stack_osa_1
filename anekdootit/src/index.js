@@ -6,7 +6,8 @@ class App extends React.Component {
   constructor (props) {
     super (props)
     this.state = {
-      selected: 0
+      selected : 0,
+      votes : [0,0,0,0,0,0]
     }
   }
 
@@ -15,11 +16,25 @@ class App extends React.Component {
 
   }
 
+  addVote = () => {
+    const votesTable = this.state.votes
+    votesTable[this.state.selected] += 1
+    this.setState({votes : votesTable})
+  }
+
+
   render () {
+
     return (
       <div>
-        {this.props.anecdotes[this.state.selected]}
-        <br/>
+        <p>
+          {this.props.anecdotes[this.state.selected]}
+          <br/>
+          has {this.state.votes[this.state.selected]} votes
+        </p>
+        <button onClick = {this.addVote}>
+          vote
+        </button>
         <button onClick = {this.handleClick} >
           next anecdote
         </button>
