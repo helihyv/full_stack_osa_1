@@ -31,43 +31,50 @@ const Statistic = ({teksti,maara}) => {
 const Statistics = ({hyvat,neutraalit,huonot}) => {
 
   const yhteensa = hyvat + neutraalit + huonot
-  let keskiarvo = 0
-  let prosenttia = '0 %'
 
   if (yhteensa !== 0) {
 
-    keskiarvo = (hyvat + huonot * -1) / (yhteensa)
+    let keskiarvo = (hyvat + huonot * -1) / (yhteensa)
     keskiarvo = keskiarvo.toFixed(1)
 
-    prosenttia = hyvat / (yhteensa) * 100
+    let prosenttia = hyvat / (yhteensa) * 100
     prosenttia = prosenttia.toFixed(1) + ' %'
+
+    return (
+      <div>
+        <Statistic
+          teksti = 'hyvä'
+          maara = {hyvat}
+        />
+        <Statistic
+          teksti = 'neutraali'
+          maara = {neutraalit}
+        />
+        <Statistic
+          teksti = 'huono'
+          maara = {huonot}
+        />
+        <Statistic
+          teksti = 'keskiarvo'
+          maara = {keskiarvo}
+        />
+        <Statistic
+          teksti = 'positiivisia'
+          maara = {prosenttia}
+        />
+      </div>
+    )
   }
 
-  return (
-    <div>
-    <Statistic
-      teksti = 'hyvä'
-      maara = {hyvat}
-      />
-    <Statistic
-      teksti = 'neutraali'
-      maara = {neutraalit}
-    />
-    <Statistic
-      teksti = 'huono'
-      maara = {huonot}
-    />
-    <Statistic
-      teksti = 'keskiarvo'
-      maara = {keskiarvo}
-    />
-    <Statistic
-      teksti = 'positiivisia'
-      maara = {prosenttia}
-    />
-
-    </div>
-  )
+  else {
+    return (
+      <div>
+        <p>
+          ei yhtään palautetta annettu
+        </p>
+      </div>
+    )
+  }
 }
 
 class App extends React.Component {
