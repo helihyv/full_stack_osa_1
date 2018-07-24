@@ -88,19 +88,7 @@ class App extends React.Component {
     }
   }
 
-  lisaaYksiHyva = () => {
-    this.setState({hyvat: this.state.hyvat + 1 })
-  }
-
-  lisaaYksiNeutraali = () => {
-    this.setState ({neutraalit: this.state.neutraalit + 1})
-  }
-
-  lisaaYksiHuono = () => {
-    this.setState ({huonot: this.state.huonot + 1})
-  }
-
-
+  lisaaYksi = (kohde) => () => this.setState({[kohde]: this.state[kohde] + 1})
 
   render () {
 
@@ -108,15 +96,15 @@ class App extends React.Component {
       <div>
         <Otsikko teksti = 'anna palautetta' />
         <Button
-          handleClick = {this.lisaaYksiHyva}
+          handleClick = {this.lisaaYksi('hyvat')}
           teksti = 'hyvä'
-          />
+        />
         <Button
-          handleClick = {this.lisaaYksiNeutraali}
+          handleClick = {this.lisaaYksi('neutraalit')}
           teksti = 'neutraali'
         />
         <Button
-          handleClick = {this.lisaaYksiHuono}
+          handleClick = {this.lisaaYksi('huonot')}
           teksti = 'huono'
         />
         <Otsikko teksti = 'statistiikka' />
