@@ -54,6 +54,21 @@ class App extends React.Component {
 
 
   render () {
+
+    let keskiarvo = 0
+    let prosenttia = '0 %'
+
+    if (this.state.hyvat + this.state.neutraalit + this.state.huonot !== 0) {
+
+      keskiarvo = (this.state.hyvat * 1 + this.state.huonot * -1)
+      / (this.state.hyvat + this.state.neutraalit + this.state.huonot)
+      keskiarvo = keskiarvo.toFixed(1)
+
+      prosenttia = this.state.hyvat
+      / (this.state.hyvat + this.state.neutraalit + this.state.huonot) * 100
+      prosenttia = prosenttia.toFixed(1) + ' %'
+    }
+
     return (
       <div>
         <Otsikko teksti = 'anna palautetta' />
@@ -81,6 +96,14 @@ class App extends React.Component {
         <Tilasto
           teksti = 'huono'
           maara = {this.state.huonot}
+        />
+        <Tilasto
+          teksti = 'keskiarvo'
+          maara = {keskiarvo}
+        />
+        <Tilasto
+          teksti = 'positiivisia'
+          maara = {prosenttia}
         />
       </div>
     )
