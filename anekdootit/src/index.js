@@ -8,7 +8,7 @@ class App extends React.Component {
     this.state = {
       selected : 0,
       votes : [0,0,0,0,0,0]
-    }
+      }
   }
 
   handleClick = () => {
@@ -25,6 +25,14 @@ class App extends React.Component {
 
   render () {
 
+    const winner = this.state.votes.reduce((winner,value,index) => {
+      if (value > winner.votes) {
+        winner.votes = value
+        winner.index = index
+      }
+      return winner
+    }, {votes : 0, index : 0})
+
     return (
       <div>
         <p>
@@ -38,6 +46,15 @@ class App extends React.Component {
         <button onClick = {this.handleClick} >
           next anecdote
         </button>
+        <h1>
+          anecdote with most votes:
+        </h1>
+        <p>
+          {this.props.anecdotes[winner.index]}
+          <br/>
+          has {winner.votes} votes
+        </p>
+
       </div>
     )
   }
